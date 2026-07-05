@@ -173,12 +173,7 @@ export default function Home() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-navy-600/20 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto pt-24 pb-16">
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-2 mb-8">
-            <div className="w-2 h-2 bg-skyblue-400 rounded-full animate-pulse" />
-            <span className="text-white/80 text-sm font-medium">Счетоводна Кантора · Гоце Делчев</span>
-          </div>
-
+        <div className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto pt-24 pb-16">          
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight mb-6 text-balance">
             КОЛД ИНВЕСТ
             <br />
@@ -188,7 +183,7 @@ export default function Home() {
           </h1>
 
           <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Над 15 години професионален опит в счетоводство, право и бизнес консултации. Вашият надежден партньор за успех.
+            Над 19 години професионален опит в счетоводство, право и бизнес консултации. Вашият надежден партньор за успех.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -261,8 +256,8 @@ export default function Home() {
             <div className="w-12 h-1 bg-skyblue-400 mx-auto rounded-full" />
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
-            <StatCard end={15} suffix="+" label="Години на пазара" />
-            <StatCard end={100} suffix="+" label="Клиента от 4 държави" />
+            <StatCard end={19} suffix="+" label="Години на пазара" />
+            <StatCard end={80} suffix="+" label="Клиента от 4 държави" />
             <StatCard end={500000} prefix="> " label="Обработени документи" />
             <StatCard end={10000} prefix="> " label="Подадени ДДС декларации" />
           </div>

@@ -148,7 +148,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} КОЛД ИНВЕСТ ЕООД. Всички права запазени.
           </p>
           <p className="text-gray-600 text-xs">
-            ЕИК / БУЛСТАТ: гр. Гоце Делчев, ул. Пирин 1
+            Developed by Zdravko Koldzhiev
           </p>
         </div>
       </div>
