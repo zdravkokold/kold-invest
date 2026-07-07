@@ -46,7 +46,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/kold1invest"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-xl bg-white/10 hover:bg-skyblue-400 flex items-center justify-center transition-all duration-200 hover:scale-110"
@@ -55,7 +55,7 @@ export default function Footer() {
                 <Facebook size={18} />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://bg.linkedin.com/company/kold-invest-ltd."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-xl bg-white/10 hover:bg-skyblue-400 flex items-center justify-center transition-all duration-200 hover:scale-110"

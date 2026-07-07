@@ -59,7 +59,7 @@ export default function Navbar() {
             <img
               src="/Kold_Invest_Logo.png"
               alt="КОЛД ИНВЕСТ ЕООД"
-              className="h-12 md:h-14 w-auto object-contain"
+              className="h-12 w-auto object-contain mt-4 mb-4 brightness-0 invert"
             />
           </NavLink>
 
