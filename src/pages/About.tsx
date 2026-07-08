@@ -69,7 +69,11 @@ const officeImages = [
 
 export default function About() {
   return (
+<<<<<<< HEAD
     <div className="pt-28">
+=======
+    <div>
+>>>>>>> 3955c4098e7262680f9a252823bbef8d61b332b0
       {/* Page Header */}
       <section className="page-header text-center">
         <div className="max-w-3xl mx-auto">

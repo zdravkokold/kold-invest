@@ -17,7 +17,11 @@
 
 @layer components {
   .page-header {
+<<<<<<< HEAD
     @apply bg-gradient-to-br from-navy-800 to-navy-600 text-white py-20 px-4;
+=======
+    @apply bg-gradient-to-br from-navy-800 to-navy-600 text-white py-20 px-4 pt-40;
+>>>>>>> 3955c4098e7262680f9a252823bbef8d61b332b0
   }
   .section-title {
     @apply text-3xl md:text-4xl font-bold text-navy-700 mb-4 tracking-tight;

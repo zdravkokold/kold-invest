@@ -56,11 +56,21 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <NavLink to="/" className="flex items-center gap-3 flex-shrink-0">
+<<<<<<< HEAD
             <img
               src="/Kold_Invest_Logo.png"
               alt="КОЛД ИНВЕСТ ЕООД"
               className="h-12 w-auto object-contain mt-4 mb-4 brightness-0 invert"
             />
+=======
+            <div className="bg-white rounded-xl px-2 py-1 shadow-sm">
+              <img
+                src="/Kold_Invest_Logo.png"
+                alt="КОЛД ИНВЕСТ ЕООД"
+                className="h-10 md:h-12 w-auto object-contain"
+              />
+            </div>
+>>>>>>> 3955c4098e7262680f9a252823bbef8d61b332b0
           </NavLink>
 
           {/* Desktop nav links */}
