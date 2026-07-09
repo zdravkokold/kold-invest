@@ -166,10 +166,6 @@ export default function Blog() {
       <section className="page-header text-center">
         <div className="max-w-3xl mx-auto mt-20">
           <span className="inline-block text-skyblue-300 text-sm font-bold uppercase tracking-widest mb-3">
-<<<<<<< HEAD
-=======
-            <BookOpen className="inline mb-0.5 mr-1" size={14} />
->>>>>>> 3955c4098e7262680f9a252823bbef8d61b332b0
             Полезни статии
           </span>
           <h1 className="text-4xl md:text-5xl font-black mb-5">Блог</h1>
