@@ -1,0 +1,34 @@
+name: Deploy Website
+
+on:
+  push:
+    branches:
+      - main # Сменя се на master, ако главният ти бранч се казва така
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
+
+    - name: 🟢 Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: 🔨 Install dependencies
+      run: npm install
+
+    - name: 🏗️ Build Project
+      run: npm run build # Това създава папката dist
+
+    - name: 🚀 Sync dist to Hosting Server
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ftp.kold-invest.com
+        username: github@kold-invest.com
+        password: GIT@123hub
+        local-dir: ./dist/ # ТОВА КАЧВА САМО НЕЩАТА ОТ DIST ПАПКАТА!
+        server-dir: ./public_html/ # Пътят до главната папка на хостинга ти (може да е различен)

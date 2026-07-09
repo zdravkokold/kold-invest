@@ -1,7 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { MapPin, Phone, Mail, Clock, Facebook, Linkedin, Send, CheckCircle, AlertCircle } from 'lucide-react';
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xpwzdvgq';
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/kold_invest@abv.bg,zdravko.koldjiev@gmail.com';
 
 const workingHours = [
   { day: 'Понеделник', short: 'Пон', hours: '09:00 – 17:00', closed: false },
@@ -24,14 +24,17 @@ export default function Contacts() {
     e.preventDefault();
     setStatus('sending');
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch(FORM_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
-          'Вашето име': form.name,
-          'Вашият e-mail': form.email,
-          'Относно': form.subject,
-          'Вашето запитване': form.message,
+          _subject: `Запитване от контактната форма: ${form.subject}`,
+          _template: 'table',
+          _captcha: 'false',
+          name: form.name,
+          email: form.email,
+          subject: form.subject,
+          message: form.message,
         }),
       });
       setStatus(res.ok ? 'success' : 'error');
@@ -39,15 +42,14 @@ export default function Contacts() {
       setStatus('error');
     }
   };
-
   const today = new Date().getDay();
   const dayMap = [6, 0, 1, 2, 3, 4, 5];
 
   return (
-    <div className="pt-28">
+    <div>
       {/* Page Header */}
       <section className="page-header text-center">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto mt-20">
           <span className="inline-block text-skyblue-300 text-sm font-bold uppercase tracking-widest mb-3">
             Свържете се с нас
           </span>
@@ -195,6 +197,7 @@ export default function Contacts() {
                         <input
                           required
                           type="text"
+                          name="name"
                           className="input-field"
                           placeholder="Иван Иванов"
                           value={form.name}
@@ -206,6 +209,7 @@ export default function Contacts() {
                         <input
                           required
                           type="email"
+                          name="email"
                           className="input-field"
                           placeholder="ivan@example.com"
                           value={form.email}
@@ -218,6 +222,7 @@ export default function Contacts() {
                       <input
                         required
                         type="text"
+                        name="subject"
                         className="input-field"
                         placeholder="Запитване за счетоводни услуги..."
                         value={form.subject}
@@ -229,6 +234,7 @@ export default function Contacts() {
                       <textarea
                         required
                         rows={6}
+                        name="message"
                         className="input-field resize-none"
                         placeholder="Опишете подробно Вашето запитване..."
                         value={form.message}

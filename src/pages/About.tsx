@@ -1,8 +1,9 @@
+
 import { NavLink } from 'react-router-dom';
+import { useRef, useState } from 'react';
 import {
   Target,
   Shield,
-  Lightbulb,
   Users,
   Cpu,
   Lock,
@@ -11,6 +12,7 @@ import {
   Calendar,
   Play,
   Image,
+  X,
 } from 'lucide-react';
 
 const values = [
@@ -57,22 +59,37 @@ const milestones = [
   { year: '2010', event: 'Разширяване на екипа и увеличаване на клиентската база.' },
   { year: '2015', event: 'Навлизане на международния пазар – обслужване на клиенти от 4 държави.' },
   { year: '2020', event: 'Дигитализация на процесите и въвеждане на онлайн услуги.' },
-  { year: '2024', event: 'Над 100 клиента, 500 000+ обработени документа и 15+ години опит.' },
+  { year: '2026', event: 'Над 80 клиента, 500 000+ обработени документа и 15+ години опит.' },
 ];
 
 const officeImages = [
-  'https://images.pexels.com/photos/1170412/pexels-photo-1170412.jpeg?auto=compress&cs=tinysrgb&w=600',
-  'https://images.pexels.com/photos/3182773/pexels-photo-3182773.jpeg?auto=compress&cs=tinysrgb&w=600',
-  'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600',
-  'https://images.pexels.com/photos/2977565/pexels-photo-2977565.jpeg?auto=compress&cs=tinysrgb&w=600',
+  { src: '/главна.jpg', alt: 'Офисът на КОЛД ИНВЕСТ' },
+  { src: '/офис.jpg', alt: 'Работно пространство в офиса' },
+  { src: '/архив.jpg', alt: 'Архив и документация' },
 ];
 
 export default function About() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<(typeof officeImages)[number] | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleVideoClick = () => {
+    if (!videoRef.current) return;
+
+    if (isPlaying) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      videoRef.current.play().catch(() => setIsPlaying(false));
+      setIsPlaying(true);
+    }
+  };
+
   return (
-    <div className="pt-28">
+    <div>
       {/* Page Header */}
       <section className="page-header text-center">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto mt-20">
           <span className="inline-block text-skyblue-300 text-sm font-bold uppercase tracking-widest mb-3">
             Кои сме ние
           </span>
@@ -123,7 +140,7 @@ export default function About() {
             <div className="relative">
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                 <img
-                  src="https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  src="/екип.jpg"
                   alt="Нашата мисия"
                   className="w-full h-96 object-cover"
                 />
@@ -218,15 +235,23 @@ export default function About() {
               </h3>
               <div className="w-10 h-1 bg-crimson-600 rounded-full mb-6" />
               <div className="grid grid-cols-2 gap-3">
-                {officeImages.map((src, i) => (
-                  <div key={i} className={`relative overflow-hidden rounded-2xl shadow-md ${i === 0 ? 'row-span-2 col-span-1' : ''}`}>
+                {officeImages.map((image, i) => (
+                  <button
+                    type="button"
+                    key={image.src}
+                    onClick={() => setSelectedImage(image)}
+                    className={`relative overflow-hidden rounded-2xl shadow-md bg-navy-900 group/gallery focus:outline-none focus:ring-2 focus:ring-crimson-500 ${
+                      i === 0 ? 'row-span-2 col-span-1' : ''
+                    }`}
+                    aria-label={`Отвори ${image.alt}`}
+                  >
                     <img
-                      src={src}
-                      alt={`Офис снимка ${i + 1}`}
-                      className={`w-full object-cover hover:scale-105 transition-transform duration-500 ${i === 0 ? 'h-64' : 'h-28'}`}
+                      src={image.src}
+                      alt={image.alt}
+                      className={`w-full object-cover group-hover/gallery:scale-105 transition-transform duration-500 ${i === 0 ? 'h-64' : 'h-28'}`}
                     />
-                    <div className="absolute inset-0 bg-navy-900/20 hover:bg-transparent transition-colors" />
-                  </div>
+                    <div className="absolute inset-0 bg-navy-900/20 group-hover/gallery:bg-transparent transition-colors" />
+                  </button>
                 ))}
               </div>
             </div>
@@ -238,24 +263,67 @@ export default function About() {
                 Нашата видеовизитка
               </h3>
               <div className="w-10 h-1 bg-crimson-600 rounded-full mb-6" />
-              <div className="relative rounded-2xl overflow-hidden bg-navy-900 aspect-video shadow-xl group cursor-pointer">
-                <img
-                  src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800"
-                  alt="Видеовизитка"
-                  className="w-full h-full object-cover opacity-50 group-hover:opacity-40 transition-opacity"
+              <div className="relative rounded-2xl overflow-hidden bg-navy-900 aspect-video shadow-xl group">
+                <video
+                  ref={videoRef}
+                  src="/видеовизитка.mp4"
+                  poster="/главна.jpg"
+                  controls={isPlaying}
+                  playsInline
+                  onPlay={() => setIsPlaying(true)}
+                  onPause={() => setIsPlaying(false)}
+                  className={`w-full h-full object-contain bg-navy-950 transition-opacity ${
+                    isPlaying ? 'opacity-100' : 'opacity-60 group-hover:opacity-50'
+                  }`}
                 />
-                <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-xl border-2 border-white/30">
+                {!isPlaying && (
+                  <button
+                    type="button"
+                    onClick={handleVideoClick}
+                    className="absolute inset-0 flex flex-col items-center justify-center"
+                    aria-label="Пусни видеовизитката"
+                  >
+                  <span className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-xl border-2 border-white/30">
                     <Play size={32} className="text-white ml-1" />
-                  </div>
-                  <p className="text-white font-semibold text-lg">КОЛД ИНВЕСТ ЕООД</p>
-                  <p className="text-white/70 text-sm">Видеовизитка</p>
-                </div>
+                  </span>
+                  <span className="text-white font-semibold text-lg">КОЛД ИНВЕСТ ЕООД</span>
+                  <span className="text-white/70 text-sm">Видеовизитка</span>
+                  </button>
+                )}
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      {selectedImage && (
+        <div className="fixed inset-0 z-[60] bg-navy-950/90 backdrop-blur-sm px-4 py-6 flex items-center justify-center">
+          <button
+            type="button"
+            onClick={() => setSelectedImage(null)}
+            className="absolute top-4 right-4 z-20 w-11 h-11 rounded-full bg-white/90 hover:bg-white text-navy-800 flex items-center justify-center shadow-lg transition-colors"
+            aria-label="Затвори снимката"
+          >
+            <X size={22} />
+          </button>
+          <button
+            type="button"
+            onClick={() => setSelectedImage(null)}
+            className="absolute inset-0 z-0 cursor-default"
+            aria-label="Затвори галерията"
+          />
+          <figure className="relative z-10 w-full max-w-6xl max-h-[86vh] flex flex-col items-center">
+            <img
+              src={selectedImage.src}
+              alt={selectedImage.alt}
+              className="max-w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl bg-navy-950"
+            />
+            <figcaption className="mt-4 text-white/80 text-sm text-center">
+              {selectedImage.alt}
+            </figcaption>
+          </figure>
+        </div>
+      )}
 
       {/* CTA Banner */}
       <section className="py-16 gradient-navy">

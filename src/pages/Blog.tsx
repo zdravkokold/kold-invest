@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BookOpen, Clock, Tag, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Clock, Tag, ArrowRight, ChevronLeft, ChevronRight, X } from 'lucide-react';
 
 const articles = [
   {
@@ -96,6 +96,54 @@ const articles = [
 
 const ITEMS_PER_PAGE = 6;
 
+const articleBodies: Record<number, string[]> = {
+  1: [
+    'Европейските програми могат да дадат силен тласък на малкия и средния бизнес, когато проектът е подготвен с ясна цел, реалистичен бюджет и точна документация.',
+    'В този пример фокусът е върху предварителната подготовка: проверка на допустимостта, събиране на оферти, описание на инвестицията и аргументиране на очаквания ефект за фирмата.',
+    'Най-честата причина добри идеи да не стигнат до финансиране е подценяването на административните детайли. Затова е важно проектът да се разглежда не само като формуляр, а като бизнес план с измерими резултати.',
+  ],
+  2: [
+    'СУПТО е съкращение от система за управление на продажбите в търговски обект. Темата е важна за търговци, които използват софтуер за издаване, проследяване и управление на продажби.',
+    'Добрата организация започва с яснота какви документи се издават, къде се съхраняват данните и как софтуерът комуникира с фискалното устройство.',
+    'Преди избор или смяна на програма е разумно да се направи кратък преглед на процесите в обекта, защото техническото решение трябва да следва реалната работа, а не обратното.',
+  ],
+  3: [
+    'Deloitte, PwC, EY и KPMG са познати като Големите 4, защото обслужват огромна част от международния пазар на одит, данъци и консултации.',
+    'Техният мащаб е впечатляващ, но местните счетоводни къщи имат свое предимство: близък контакт, бърза реакция и познаване на конкретната регионална среда.',
+    'За много фирми най-ценното не е огромна структура, а партньор, който разбира бизнеса им, следи сроковете и може да обясни сложното на човешки език.',
+  ],
+  4: [
+    'National Insurance Number е идентификационен номер, необходим за работа и осигуряване в Обединеното кралство. За български граждани процесът изисква подготовка на лични данни и доказване на основание.',
+    'Първата стъпка е да се провери актуалният ред за кандидатстване и какви документи се приемат. След това се попълва заявление и при нужда се провежда допълнителна проверка.',
+    'Практичният съвет е да пазите копия от всички изпратени документи и кореспонденция, защото това улеснява проследяването на процедурата.',
+  ],
+  5: [
+    'В счетоводството има различни стилове на работа: аналитичният, подреденият, комуникативният, предпазливият и технологично ориентираният специалист.',
+    'Нито един тип не е сам по себе си най-добър. Силният екип комбинира различни качества: внимание към детайла, спокойствие под напрежение и умение да се говори ясно с клиента.',
+    'Когато избирате счетоводител, търсете не само знания, а и стил на комуникация, който пасва на начина, по който управлявате бизнеса си.',
+  ],
+  6: [
+    'Изборът между външна счетоводна къща и счетоводител на трудов договор зависи от обема работа, сложността на дейността и нуждата от постоянна вътрешна координация.',
+    'Аутсорсингът често е по-гъвкав за малки и средни фирми, защото дава достъп до екип и опит без разходите за цял отдел.',
+    'Вътрешният счетоводител може да е подходящ при големи операции, много документи и ежедневна нужда от присъствие. Най-доброто решение идва след реална оценка на процесите.',
+  ],
+  7: [
+    'Въпросът за доходи с по-ниско или нулево данъчно облагане трябва винаги да се разглежда през закона, а не през слухове и обещания за лесни схеми.',
+    'Има необлагаеми доходи, данъчни облекчения и законни режими, които могат да намалят тежестта, но всеки случай зависи от източника на дохода и статута на лицето.',
+    'Най-сигурният подход е предварителна консултация, преди да се сключи договор или да се получи плащане, защото правилното планиране е по-евтино от поправянето на грешки.',
+  ],
+  8: [
+    'Фирма без дейност не означава фирма без задължения. В много случаи остават ангажименти за декларации, годишно приключване или обявяване на обстоятелства.',
+    'Собствениците често пропускат срокове, защото смятат, че липсата на приходи автоматично отменя отчетността. Това може да доведе до глоби и излишно напрежение.',
+    'Добра практика е веднъж годишно да се проверява състоянието на дружеството и нужните документи, дори когато няма стопанска активност.',
+  ],
+  9: [
+    'Глобите по ЗДДС обикновено са свързани със закъснели декларации, неточни данни, пропусната регистрация или неправилно документиране на сделки.',
+    'Най-добрата защита е редовна комуникация със счетоводителя и навременно предоставяне на документи. ДДС сроковете са кратки и рядко прощават отлагане.',
+    'Ако вече е получен акт или покана от НАП, важно е да се реагира бързо, да се прегледат фактите и да се подготви аргументиран отговор.',
+  ],
+};
+
 const categoryColors: Record<string, string> = {
   'Новини': 'bg-navy-100 text-navy-700',
   'Данъчно право': 'bg-crimson-100 text-crimson-700',
@@ -108,14 +156,15 @@ const categoryColors: Record<string, string> = {
 
 export default function Blog() {
   const [page, setPage] = useState(1);
+  const [selectedArticle, setSelectedArticle] = useState<(typeof articles)[number] | null>(null);
   const totalPages = Math.ceil(articles.length / ITEMS_PER_PAGE);
   const visible = articles.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
 
   return (
-    <div className="pt-28">
+    <div>
       {/* Page Header */}
       <section className="page-header text-center">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto mt-20">
           <span className="inline-block text-skyblue-300 text-sm font-bold uppercase tracking-widest mb-3">
             Полезни статии
           </span>
@@ -166,7 +215,11 @@ export default function Blog() {
                   <p className="text-gray-500 text-sm leading-relaxed mb-5 line-clamp-3">
                     {article.excerpt}
                   </p>
-                  <button className="flex items-center gap-2 text-crimson-600 hover:text-crimson-700 text-sm font-semibold transition-colors group/btn">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedArticle(article)}
+                    className="flex items-center gap-2 text-crimson-600 hover:text-crimson-700 text-sm font-semibold transition-colors group/btn"
+                  >
                     Прочети
                     <ArrowRight size={15} className="group-hover/btn:translate-x-1 transition-transform" />
                   </button>
@@ -207,6 +260,54 @@ export default function Blog() {
           </div>
         </div>
       </section>
+
+      {selectedArticle && (
+        <div className="fixed inset-0 z-[60] bg-navy-950/70 backdrop-blur-sm px-4 py-6 md:py-10 overflow-y-auto">
+          <article className="max-w-3xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
+            <div className="relative h-56 md:h-72">
+              <img
+                src={selectedArticle.image}
+                alt={selectedArticle.title}
+                className="w-full h-full object-cover"
+              />
+              <div className={`absolute inset-0 bg-gradient-to-t ${selectedArticle.color} opacity-55`} />
+              <button
+                type="button"
+                onClick={() => setSelectedArticle(null)}
+                className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-navy-800 flex items-center justify-center shadow-lg transition-colors"
+                aria-label="Затвори статията"
+              >
+                <X size={20} />
+              </button>
+              <div className="absolute left-6 right-6 bottom-6">
+                <span className={`inline-flex items-center text-xs font-bold px-3 py-1.5 rounded-full mb-4 ${categoryColors[selectedArticle.category] ?? 'bg-white/20 text-white'} backdrop-blur-sm`}>
+                  <Tag size={10} className="mr-1" />
+                  {selectedArticle.category}
+                </span>
+                <h2 className="text-2xl md:text-3xl font-black text-white leading-tight">
+                  {selectedArticle.title}
+                </h2>
+              </div>
+            </div>
+            <div className="p-6 md:p-9">
+              <div className="flex items-center gap-3 text-gray-400 text-xs mb-6">
+                <span className="flex items-center gap-1">
+                  <Clock size={11} />
+                  {selectedArticle.readTime}
+                </span>
+                <span>·</span>
+                <span>{selectedArticle.date}</span>
+              </div>
+              <div className="space-y-5 text-gray-700 leading-relaxed">
+                <p className="text-lg text-navy-800 font-medium">{selectedArticle.excerpt}</p>
+                {(articleBodies[selectedArticle.id] ?? []).map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
+          </article>
+        </div>
+      )}
     </div>
   );
 }

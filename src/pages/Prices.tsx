@@ -1,8 +1,8 @@
 import { useState, FormEvent } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Send, CheckCircle, AlertCircle, ArrowRight, FileText } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle, ArrowRight } from 'lucide-react';
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xpwzdvgq';
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/kold_invest@abv.bg,zdravko.koldjiev@gmail.com';
 
 type RadioValue = 'Да' | 'Не' | '';
 
@@ -60,12 +60,10 @@ const servicesOptions = [
 
 function RadioGroup({
   label,
-  name,
   value,
   onChange,
 }: {
   label: string;
-  name: string;
   value: RadioValue;
   onChange: (v: RadioValue) => void;
 }) {
@@ -172,6 +170,9 @@ export default function Prices() {
     setStatus('sending');
     try {
       const body: Record<string, string> = {
+        _subject: `Запитване за цена: ${form.companyName || form.email}`,
+        _template: 'table',
+        _captcha: 'false',
         'Наименование на дружеството': form.companyName,
         'ЕИК или БУЛСТАТ': form.eik,
         'Правна форма': form.legalForm,
@@ -192,7 +193,7 @@ export default function Prices() {
         'Телефон': form.phone,
         'Специфични изисквания': form.notes,
       };
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch(FORM_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(body),
@@ -204,10 +205,10 @@ export default function Prices() {
   };
 
   return (
-    <div className="pt-28">
+    <div>
       {/* Page Header */}
       <section className="page-header text-center">
-        <div className="max-w-3xl mx-auto">          
+        <div className="max-w-3xl mx-auto mt-20">          
           <h1 className="text-4xl md:text-5xl font-black mb-5">Цени</h1>
           <p className="text-white/75 text-lg leading-relaxed max-w-2xl mx-auto">
             Ако искате да получите своята ценова оферта, моля попълнете въпросника и ние ще ви отговорим в рамките на два работни дни.
@@ -308,13 +309,11 @@ export default function Prices() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <RadioGroup
                     label="Чуждестранно участие"
-                    name="foreignParticipation"
                     value={form.foreignParticipation}
                     onChange={(v) => setField('foreignParticipation', v)}
                   />
                   <RadioGroup
                     label="Дъщерни дружества"
-                    name="subsidiaries"
                     value={form.subsidiaries}
                     onChange={(v) => setField('subsidiaries', v)}
                   />
@@ -408,13 +407,11 @@ export default function Prices() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
                   <RadioGroup
                     label="Поддържате ли складови наличности със стоки"
-                    name="stockInventory"
                     value={form.stockInventory}
                     onChange={(v) => setField('stockInventory', v)}
                   />
                   <RadioGroup
                     label="Използвате ли складова програма"
-                    name="warehouseProgram"
                     value={form.warehouseProgram}
                     onChange={(v) => setField('warehouseProgram', v)}
                   />

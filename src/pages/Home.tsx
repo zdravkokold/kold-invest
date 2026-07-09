@@ -8,7 +8,6 @@ import {
   Monitor,
   ArrowRight,
   Quote,
-  Facebook,
   Users,
   Star,
 } from 'lucide-react';
@@ -85,13 +84,13 @@ const services = [
 
 // ─── Team data ──────────────────────────────────────────────────────────────
 const team = [
-  { name: 'ЛЮБОМИР КОЛДЖИЕВ', role: 'Управител' },
-  { name: 'ВИОЛЕТА КОЛДЖИЕВА', role: 'Мениджър – ВИП клиенти' },
-  { name: 'РУМЯНА ТОДОРОВА', role: 'Счетоводител' },
-  { name: 'ХАВА АЛИМ', role: 'Счетоводител' },
-  { name: 'СЕЛИМ АДЕМ', role: 'Счетоводител' },
-  { name: 'ИБРИМ КОЛДЖИЕВ', role: 'Данъчен Консултант' },
-  { name: 'ЕМИНЕ ЛАВЧИЕВА', role: 'Счетоводител' },
+  { name: 'ЛЮБОМИР КОЛДЖИЕВ', role: 'Управител', image: '/любомир.jpg' },
+  { name: 'ВИОЛЕТА КОЛДЖИЕВА', role: 'Мениджър – ВИП клиенти', image: '/виолета.png' },
+  { name: 'РУМЯНА ТОДОРОВА', role: 'Счетоводител', image: '/румяна.png' },
+  { name: 'ХАВА АЛИМ', role: 'Счетоводител', image: '/хава.png' },
+  { name: 'СЕЛИМ АДЕМ', role: 'Счетоводител', image: '/селим.png' },
+  { name: 'ИБРИМ КОЛДЖИЕВ', role: 'Данъчен Консултант', image: '/ибрим.jpg' },
+  { name: 'ЕМИНЕ ЛАВЧИЕВА', role: 'Счетоводител', image: '/емине.png' },
 ];
 
 // ─── Principles data ────────────────────────────────────────────────────────
@@ -124,11 +123,6 @@ const principles = [
     accent: 'text-skyblue-500',
   },
 ];
-
-// ─── Avatar initials helper ─────────────────────────────────────────────────
-function initials(name: string) {
-  return name.split(' ').slice(0, 2).map((w) => w[0]).join('');
-}
 
 // ─── Stat card component ────────────────────────────────────────────────────
 function StatCard({ end, label, prefix = '', suffix = '' }: { end: number; label: string; prefix?: string; suffix?: string }) {
@@ -221,7 +215,7 @@ export default function Home() {
               const Icon = s.icon;
               return (
                 <div
-                  key={s.num}
+                  key={s.title}
                   className={`card p-8 group transition-all duration-500 ${servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                   style={{ transitionDelay: `${i * 100}ms` }}
                 >
@@ -231,7 +225,6 @@ export default function Home() {
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-3">
-                        <span className={`text-xs font-bold px-2.5 py-1 rounded-lg ${s.accent}`}>{s.num}</span>
                         <h3 className="text-base font-bold text-navy-800 tracking-wide">{s.title}</h3>
                       </div>
                       <p className="text-gray-600 text-sm leading-relaxed">{s.text}</p>
@@ -288,25 +281,17 @@ export default function Home() {
               >
                 {/* Avatar */}
                 <div className="relative w-20 h-20 mx-auto mb-4">
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-navy-600 to-navy-800 flex items-center justify-center shadow-lg group-hover:shadow-navy-200 group-hover:shadow-xl transition-shadow duration-300">
-                    <span className="text-white text-xl font-bold">{initials(member.name)}</span>
-                  </div>
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-20 h-20 rounded-full object-cover shadow-lg ring-4 ring-white group-hover:shadow-navy-200 group-hover:shadow-xl transition-shadow duration-300"
+                  />
                   <div className="absolute -bottom-1 -right-1 w-7 h-7 bg-crimson-600 rounded-full flex items-center justify-center shadow-md">
                     <Users size={12} className="text-white" />
                   </div>
                 </div>
                 <h3 className="text-xs font-bold text-navy-800 uppercase tracking-wide mb-1 leading-tight">{member.name}</h3>
-                <p className="text-gray-500 text-xs mb-4">{member.role}</p>
-                <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-skyblue-500 hover:text-skyblue-600 text-xs font-medium transition-colors"
-                  aria-label="Facebook"
-                >
-                  <Facebook size={14} />
-                  Facebook
-                </a>
+                <p className="text-gray-500 text-xs mb-4">{member.role}</p>                
               </div>
             ))}
           </div>

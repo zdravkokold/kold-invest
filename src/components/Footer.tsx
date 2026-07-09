@@ -42,7 +42,7 @@ export default function Footer() {
               />
             </NavLink>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Професионални счетоводни, правни и бизнес консултантски услуги с над 15 години опит на пазара.
+              Професионални счетоводни, правни и бизнес консултантски услуги с над 19 години опит на пазара.
             </p>
             <div className="flex gap-3">
               <a
