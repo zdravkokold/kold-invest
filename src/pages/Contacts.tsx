@@ -151,7 +151,11 @@ export default function Contacts() {
                 <h3 className="font-bold text-navy-800 mb-4">Социални мрежи</h3>
                 <div className="flex gap-3">
                   <a
+<<<<<<< HEAD
                     href="https://www.facebook.com/kold1invest"
+=======
+                    href="https://facebook.com"
+>>>>>>> 3955c4098e7262680f9a252823bbef8d61b332b0
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all hover:shadow-lg hover:-translate-y-0.5"
@@ -160,7 +164,11 @@ export default function Contacts() {
                     Facebook
                   </a>
                   <a
+<<<<<<< HEAD
                     href="https://bg.linkedin.com/company/kold-invest-ltd."
+=======
+                    href="https://linkedin.com"
+>>>>>>> 3955c4098e7262680f9a252823bbef8d61b332b0
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 bg-sky-700 hover:bg-sky-800 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all hover:shadow-lg hover:-translate-y-0.5"
@@ -276,6 +284,7 @@ export default function Contacts() {
 
       {/* Map placeholder */}
       <section className="h-72 bg-navy-900 relative overflow-hidden">
+<<<<<<< HEAD
   {/* 1. Фоновата мрежа е преместена тук (най-отзад), за да не блокира кликовете */}
   <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_39px,rgba(255,255,255,0.03)_40px),repeating-linear-gradient(90deg,transparent,transparent_39px,rgba(255,255,255,0.03)_40px)]" />
 
@@ -300,6 +309,27 @@ export default function Contacts() {
     </div>
   </div>
 </section>
+=======
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center">
+            <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <MapPin size={28} className="text-skyblue-400" />
+            </div>
+            <p className="text-white font-semibold">гр. Гоце Делчев, ул. Пирин 1</p>
+            <p className="text-white/60 text-sm mt-1">вх.А, ет.1, ап.1</p>
+            <a
+              href="https://maps.google.com/?q=Goce+Delchev+ul.+Pirin+1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-2 text-skyblue-400 hover:text-skyblue-300 text-sm font-medium transition-colors"
+            >
+              Отвори в Google Maps
+            </a>
+          </div>
+        </div>
+        <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_39px,rgba(255,255,255,0.03)_40px),repeating-linear-gradient(90deg,transparent,transparent_39px,rgba(255,255,255,0.03)_40px)]" />
+      </section>
+>>>>>>> 3955c4098e7262680f9a252823bbef8d61b332b0
     </div>
   );
 }

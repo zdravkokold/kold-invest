@@ -46,7 +46,11 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               <a
+<<<<<<< HEAD
                 href="https://www.facebook.com/kold1invest"
+=======
+                href="https://facebook.com"
+>>>>>>> 3955c4098e7262680f9a252823bbef8d61b332b0
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-xl bg-white/10 hover:bg-skyblue-400 flex items-center justify-center transition-all duration-200 hover:scale-110"
@@ -55,7 +59,11 @@ export default function Footer() {
                 <Facebook size={18} />
               </a>
               <a
+<<<<<<< HEAD
                 href="https://bg.linkedin.com/company/kold-invest-ltd."
+=======
+                href="https://linkedin.com"
+>>>>>>> 3955c4098e7262680f9a252823bbef8d61b332b0
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-xl bg-white/10 hover:bg-skyblue-400 flex items-center justify-center transition-all duration-200 hover:scale-110"
@@ -148,7 +156,11 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} КОЛД ИНВЕСТ ЕООД. Всички права запазени.
           </p>
           <p className="text-gray-600 text-xs">
+<<<<<<< HEAD
             Developed by Zdravko Koldzhiev
+=======
+            ЕИК / БУЛСТАТ: гр. Гоце Делчев, ул. Пирин 1
+>>>>>>> 3955c4098e7262680f9a252823bbef8d61b332b0
           </p>
         </div>
       </div>
